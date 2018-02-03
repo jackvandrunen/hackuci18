@@ -24,7 +24,8 @@ def enableCORSAfterRequestHook():
 def search_results():
     search_terms = bottle.request.query.terms       # Reads query "terms" and "location"
     location     = bottle.request.query.location
-    return yelp_api.get_search_json_data(search_terms, location)
+    response = yelp_api.get_search_json_data(search_terms, location)
+    return response
 
 @bottle.route('/lookup/', method = 'GET')
 def biz_lookup():
