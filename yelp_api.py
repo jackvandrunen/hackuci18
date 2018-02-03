@@ -81,7 +81,7 @@ def get_all_reviews_json_data(business_id: str) -> dict:    # USES BEAUTIFULSOUP
 
 
 # TESTING PURPOSES ONLY
-if __name__ == "__main__":
+#if __name__ == "__main__":
     # print(get_business_json_data('pizza-hut-irvine-3'))
     # print(get_reviews_json_data('pizza-hut-irvine-3'))
     # print(get_search_json_data("pizza hut", "Irvine, CA"))
