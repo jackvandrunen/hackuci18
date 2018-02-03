@@ -40,12 +40,12 @@ def get_business_yelp_url(business_id: str) -> str:
 
 
 # GET FUNCTIONS TO BE USED
-def get_business_json_data(business_id: str) -> (str, dict):
+def get_business_json_data(business_id: str) -> dict:
     '''
     Returns JSON data of a certain business.
     '''
     response = requests.request('GET', format_business_url(business_id), headers=HEADERS)
-    return business_id, response.json()
+    return response.json()
 
 
 def get_search_json_data(terms: str, location: str) -> dict:
