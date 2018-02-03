@@ -1,6 +1,8 @@
-# Yelp API Reqeusts
+# Yelp API Reqeusts and BeautifulSoup to Retrieve All Reviews of a Business
 
 import requests
+from bs4 import BeautifulSoup
+import json
 
 API_HOST = "https://api.yelp.com"
 API_KEY = "Y7tqjnvosHUlt_CzHiXINdMrzGJ5pAYAkpyNyFf-CVbOptscEN-wEYaqBeCiCcuO80FiRiC0UF71wMIA_ad1l4f7yRJ-WhWm9jzENIyl7ZKf7BqioZfQT2RBNVh1WnYx"
@@ -30,6 +32,13 @@ def format_reviews_url(business_id: str) -> str:
     return API_HOST + "/v3/businesses/{id}/reviews".format(id=business_id)
 
 
+def get_business_yelp_url(business_id: str) -> str:
+    '''
+    Builds business's Yelp URL.
+    '''
+    return "https://yelp.com/biz/" + business_id
+
+
 # GET FUNCTIONS TO BE USED
 def get_business_json_data(business_id: str) -> (str, dict):
     '''
@@ -52,16 +61,28 @@ def get_search_json_data(terms: str, location: str) -> dict:
     return response.json()
 
 
-def get_reviews_json_data(business_id: str) -> dict:
+def get_reviews_json_data(business_id: str) -> dict:    # ONLY ABLE TO RETRIEVE THREE REVIEWS SORTED BY YELP'S ALGORITHM
     '''
-    Returns JSON data of reviews based on a business ID.
+    Returns JSON data of only THREE reviews based on a business ID.
     '''
     response = requests.request('GET', format_reviews_url(business_id), headers=HEADERS)
     return response.json()
 
 
+def get_all_reviews_json_data(business_id: str) -> dict:    # USES BEAUTIFULSOUP TO RETRIEVE JSON FROM BUSINESS YELP SITE HTML
+    '''
+    Returns JSON data of all reviews from a business's Yelp website HTML using BeautifulSoup.
+    '''
+    html_response = requests.get(get_business_yelp_url(business_id)).text
+    soup = BeautifulSoup(html_response, "lxml")
+    data = str(soup.findAll('script', type="application/ld+json")[0].string)    # Retrieves text between specified tag
+    data = data.strip()     # Gets rid of white space on ends of string
+    return json.loads(data)
+
+
 # TESTING PURPOSES ONLY
-if __name__ == "__main__":
-    print(get_business_json_data('pizza-hut-irvine-3'))
-    print(get_reviews_json_data('pizza-hut-irvine-3'))
-    print(get_search_json_data("pizza hut", "Irvine, CA"))
+#if __name__ == "__main__":
+    # print(get_business_json_data('pizza-hut-irvine-3'))
+    # print(get_reviews_json_data('pizza-hut-irvine-3'))
+    # print(get_search_json_data("pizza hut", "Irvine, CA"))
+    # print(get_all_reviews_json_data('pizza-hut-irvine-3'))
