@@ -1,4 +1,4 @@
-# Yelp API Reqeusts and BeautifulSoup to Retrieve All Reviews of a Business
+# Yelp API Requests and BeautifulSoup to Retrieve All Reviews of a Business
 
 import requests
 from bs4 import BeautifulSoup
