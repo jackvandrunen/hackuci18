@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Search from  './components/Search'
-import request from 'async-request'
-// import {BrowserRouter as Router, Route} from 'react-router-dom'
+import request from 'request'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css';
-
+import ResultsList from './components/ResultsList'
 
 class App extends Component {
   constructor() {
@@ -21,53 +21,48 @@ class App extends Component {
     if (searchTerm.length === 0) {
         return null
     } else {
-        this.getSearchData(searchTerm).then((data) => {
-            this.setState({
-                searched: true,
-                loading: false,
-                results: data
-            })
-        })
+        this.getSearchData(searchTerm)
     }
 }
 
-getSearchData = async (searchTerm) => {
-  let response
+getSearchData = (searchTerm) => {
   try {
-      response = await request('http://localhost:8080/search/',{
-        method: 'GET',
-        data: {
-          terms: 'pizza', location: 'Irvine'
-        }
-      });
-    //   var request = require("request");
+      var yelp_help = this
+      var options = { method: 'GET',
+        url: 'http://localhost:8080/search/',
+        qs: { terms: searchTerm, location: 'irvine' }
+      };
 
-    //   var options = { method: 'GET',
-    //     url: 'http://localhost:8080/search/',
-    //     qs: { terms: 'pizza', location: 'irvine' }
-    //   };
-
-    // request(options, function (error, response, body) {
-    //   if (error) throw new Error(error);
-    // });
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+      var json = JSON.parse(body)
+      var food_list = json.businesses
+      yelp_help.setState({
+        searched: true,
+        loading: false,
+        results: food_list
+      })
+    });
   } catch (e) {
       console.log(e)
   }
-  let data
-  try {
-      data = await response.json()
-  } catch (e) {
-      console.log(e)
-  }
-  return data
 }
 
   render() {
     return (
-      <div>
-        <Search 
-          updateSearchTerm={this.updateSearchTerm} />
-      </div>
+      <Router>
+        <div>
+          <Search 
+            updateSearchTerm={this.updateSearchTerm} />
+          <Route exact path="/" render = {() => (
+                <ResultsList 
+                    loading={this.state.loading}
+                    results={this.state.results}
+                    searched={this.state.searched}
+                />
+            )}/>
+        </div>
+      </Router>
     );
   }
 }
