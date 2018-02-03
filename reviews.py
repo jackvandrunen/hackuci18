@@ -1,5 +1,5 @@
 class Reviews:
-    def __init__(self, business_id: str, decoded_json: dict):
+    def __init__(self, decoded_json: dict):
         self._review_text = self._generate_review_text(decoded_json)
     
     def get_review_text(self) -> [str]:
