@@ -4,6 +4,12 @@ import bottle
 import ml
 import json
 
+@bottle.hook('after_request')
+def enableCORSAfterRequestHook():
+    print ('After request hook.')
+    bottle.response.headers['Access-Control-Allow-Origin'] = '*'
+    
+
 @bottle.route('/menu/', method='GET')
 def search_results():
     try:
