@@ -33,11 +33,10 @@
 }
 
 .search-submit {
-    background-color: #D1262B;
+    background-color:white;
     height: 44px;
     width: 53px;
     cursor: pointer;
-    vertical-align: middle;
     margin-bottom: 3px;
     margin-top: 3px;
     border: 1px solid #000000;

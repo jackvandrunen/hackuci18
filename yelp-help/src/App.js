@@ -3,6 +3,7 @@ import Search from  './components/Search'
 import request from 'request'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css';
+import Banner from './components/Banner'
 import ResultsList from './components/ResultsList'
 
 class App extends Component {
@@ -17,7 +18,6 @@ class App extends Component {
   }
 
   updateSearchTerm = (searchTerm) => {
-    console.log(searchTerm)
     if (searchTerm.length === 0) {
         return null
     } else {
@@ -50,19 +50,24 @@ getSearchData = (searchTerm) => {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Search 
-            updateSearchTerm={this.updateSearchTerm} />
-          <Route exact path="/" render = {() => (
-                <ResultsList 
-                    loading={this.state.loading}
-                    results={this.state.results}
-                    searched={this.state.searched}
-                />
-            )}/>
+      <div>
+        <div className='App-header'>
+          <Banner/>
         </div>
-      </Router>
+        <Router>
+          <div>
+            <Search 
+              updateSearchTerm={this.updateSearchTerm} />
+            <Route exact path="/" render = {() => (
+                  <ResultsList 
+                      loading={this.state.loading}
+                      results={this.state.results}
+                      searched={this.state.searched}
+                  />
+              )}/>
+          </div>
+        </Router>
+      </div>
     );
   }
 }

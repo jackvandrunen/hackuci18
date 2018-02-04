@@ -3,6 +3,7 @@
     height: 100px;
     width: 100%;
     max-width: 900px;
+    margin-left: 150px;
     padding-left: 15px;
     padding-right: 15px;
     flex-direction: column;
