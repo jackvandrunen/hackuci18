@@ -31,7 +31,7 @@ class DetailsPane extends React.Component {
                 var json = JSON.parse(body)
                 console.log(json)
                 my_app.setState({
-                    name: json[0].restaurant.name,
+                    name: json[0].name,
                     food_info: json[1]
                 })
                 my_app.state.requested = true
@@ -41,7 +41,7 @@ class DetailsPane extends React.Component {
             }
             return (
                 <div className ="menu-list-container">
-                        <h2>Loading for {this.state.my_id}</h2>
+                        <h2>Loading {this.state.my_id}...</h2>
                 </div>)
         } else if (this.state.requested) {
             console.log('Food info good!')
