@@ -85,4 +85,4 @@ def menu_response(reviews):
                 pass
         similar_phrases.pop(0)
     
-    return sorted(score_phrases(food_phrases, reviews), key=lambda t: t[1]), 200
+    return sorted(score_phrases(food_phrases, reviews), key=lambda t: t[1], reverse=True), 200
