@@ -9,32 +9,43 @@ class DetailsPane extends React.Component {
         super(props)
 
         this.state = {
-            my_id = props.match.params.place,
-            food_info = {}
+            requested: false,
+            my_id: props.match.params.place,
+            food_info: []
         }
     }
 
     //var my_id = props.match.params.place
     render() {
-        if (this.state.food_info === {}) {
-            my_app = this
+        if (this.state.my_id !== '') {
+            console.log(this.state.my_id)
+            var my_app = this
             try {
                 var options = { method: 'GET',
                   url: 'http://localhost:8080/lookup/',
                   qs: {id : my_app.state.my_id}
                 };
-          
               request(options, function (error, response, body) {
                 if (error) throw new Error(error);
                 var json = JSON.parse(body)
                 my_app.setState({
-                    food_info = json[1]
+                    food_info: json[1]
                 })
+                my_app.state.requested = true
                 console.log(my_app.state.food_info)
               });
             } catch (e) {
                 console.log(e)
             }
+            return (<div className='menu_list_container'>
+            <div className="menu-list">
+                {this.state.food_info.forEach(element => {
+                return (
+                    <MenuItem info={element}/>
+                    ) 
+                })};
+            </div> 
+        </div>)
         } else if (this.state.food_info.length > 0) {
             console.log('Food info good!')
             // return (
@@ -46,7 +57,7 @@ class DetailsPane extends React.Component {
             // )
             return (<div className='menu_list_container'>
                     <div className="menu-list">
-                        {food_info.forEach(element => {
+                        {this.state.food_info.forEach(element => {
                         return (
                             <MenuItem info={element}/>
                             ) 
@@ -57,7 +68,7 @@ class DetailsPane extends React.Component {
             console.log("i hate food info!")
             return (
                 <div className ="details-pane-container">
-                    <h2>Loading for {props.match.params.place}</h2>
+                    <h2>Loading for {this.state.my_id}</h2>
                 </div>
             )       
         }
