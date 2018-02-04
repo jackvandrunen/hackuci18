@@ -61,7 +61,7 @@ def get_search_json_data(terms: str, location: str) -> dict:
             'term': terms.replace(' ', '+'),
             'location': location.replace(' ', '+'),
             'limit': SEARCH_LIMIT,
-            'categories': "restaurant"
+            'categories': "food,All,restaurants,All"
         }
         response = requests.request('GET', format_search_url(), headers=HEADERS, params=search_terms)
         return response.json()
@@ -95,8 +95,8 @@ def get_all_reviews_json_data(business_id: str) -> dict:    # USES BEAUTIFULSOUP
 
 
 # TESTING PURPOSES ONLY
-# if __name__ == "__main__":
+if __name__ == "__main__":
 #     print(get_business_json_data('pizza-hut-irvine-3'))
 #     print(get_reviews_json_data('pizza-hut-irvine-3'))
-#     print(get_search_json_data("pizza hut", "Irvine, CA"))
+#     print(get_search_json_data("computers", "Irvine, CA"))
 #     print(get_all_reviews_json_data('pizza-hut-irvine-3'))
