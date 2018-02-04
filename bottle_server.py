@@ -34,7 +34,7 @@ def _retrieve_ml_json_data(business_id: str) -> json:   # Talks to ML server and
 def biz_lookup():
     business_id = bottle.request.query.id
     ml_reviews  = _retrieve_ml_json_data(business_id)
-    return yelp_api.get_business_json_data(business_id), ml_reviews
+    return json.dumps((yelp_api.get_business_json_data(business_id), ml_reviews))
 # *********************************************************************************
 
 @bottle.route('/ml_json/', method = 'GET')
