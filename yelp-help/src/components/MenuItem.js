@@ -10,6 +10,7 @@ class MenuItem extends React.Component {
         console.log("please")
         const item = this.props.info.item
         const rating = this.props.info.rating
+        console.log(item)
         const containerClasses = 'menu-list-item-container'
         return (
             <div className={containerClasses}>
