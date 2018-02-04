@@ -16,11 +16,14 @@ class SearchBar extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         })
-        console.log('hello');
+        console.log(event)
     }
 
     handleSubmit = (event) => {
         event.preventDefault()
+        if (this.state.searched) {
+            this.props.resetSearch
+        }
         this.setState({searched: true})
         this.props.updateSearchTerm(this.state.search)
     }
@@ -40,8 +43,9 @@ class SearchBar extends React.Component {
                     <button
                         type="submit"
                         className="search-submit"
-                        onClick={this.handleSubmit}
-                    />
+                        onClick={this.handleSubmit}>
+                        Click me!
+                    </button>
                 </form>
             </div>
         )
@@ -50,7 +54,6 @@ class SearchBar extends React.Component {
 
 SearchBar.PropTypes = {
     updateSearchTerm: PropTypes.func.isRequired,
-    setShrink: PropTypes.func.isRequired,
     resetSearch: PropTypes.func.isRequired
 }
 

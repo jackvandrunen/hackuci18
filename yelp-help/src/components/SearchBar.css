@@ -35,13 +35,12 @@
 .search-submit {
     background-color:white;
     height: 44px;
-    width: 53px;
+    width: 100%;
     cursor: pointer;
     margin-bottom: 3px;
     margin-top: 3px;
     border: 1px solid #000000;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 2em;
-    color: white;
+    font-size: 16px;
 }

@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css';
 import Banner from './components/Banner'
 import ResultsList from './components/ResultsList'
+import DetailsPane from './components/DetailsPane'
 
 class App extends Component {
   constructor() {
@@ -17,13 +18,21 @@ class App extends Component {
       }
   }
 
+    resetSearch = () => {
+      this.setState({
+          results: [],
+          loading: false,
+          searched: false
+      })
+  }
+
   updateSearchTerm = (searchTerm) => {
     if (searchTerm.length === 0) {
         return null
     } else {
         this.getSearchData(searchTerm)
     }
-}
+  }
 
 getSearchData = (searchTerm) => {
   try {
@@ -51,18 +60,25 @@ getSearchData = (searchTerm) => {
   render() {
     return (
       <div>
-        <div className='App-header'>
+        <div>
           <Banner/>
         </div>
         <Router>
           <div>
             <Search 
-              updateSearchTerm={this.updateSearchTerm} />
+              updateSearchTerm={this.updateSearchTerm}
+              resetSearch={this.resetSearch} />
             <Route exact path="/" render = {() => (
                   <ResultsList 
                       loading={this.state.loading}
                       results={this.state.results}
                       searched={this.state.searched}
+                  />
+              )}/>
+            <Route path="/details/" render={() => (
+                  <DetailsPane
+                      loading={this.state.loading}
+                      results={this.state.results}
                   />
               )}/>
           </div>

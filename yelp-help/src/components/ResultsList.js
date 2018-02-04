@@ -17,7 +17,7 @@ const ResultsList = (props) => {
                  <div className="results-list">
                     {props.results.map((item, index) => {
                         return (
-                            <ListItem key = {index} restaurant={item} />
+                            <ListItem key = {index} restaurant={item}/>
                         )
                     })}
                 </div> 
@@ -43,7 +43,7 @@ const ResultsList = (props) => {
 
 ResultsList.PropTypes = {
     loading: PropTypes.bool.isRequired,
-    searched: PropTypes.bool.isRequired
+    searched: PropTypes.bool.isRequired,
 }
 
 export default ResultsList
