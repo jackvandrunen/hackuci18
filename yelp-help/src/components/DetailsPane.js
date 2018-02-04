@@ -3,11 +3,12 @@ import './DetailsPane.css'
 import PropTypes from 'prop-types'
 import request from 'request'
 import MenuItem from './MenuItem'
+import {Link} from 'react-router-dom'
 
 class DetailsPane extends React.Component {
     constructor (props) {
         super(props)
-
+        console.log(props)
         this.state = {
             requested: false,
             my_id: props.match.params.place,
@@ -16,6 +17,10 @@ class DetailsPane extends React.Component {
             address:''
         }
         this.state.requested = false
+    }
+
+    clickHandler = (event) => {
+        <Link to={`/`} />
     }
 
     render() {
@@ -50,6 +55,7 @@ class DetailsPane extends React.Component {
                 console.log("food found")
                 return (<div className='menu_list_container'>
                 <div className="menu-list">
+                <button onClick={this.clickHandler} Reset Search />
                 <h2> {this.state.name} at {this.state.address}</h2>
                     {this.state.food_info.map((item, index) => {
                         console.log(item)
@@ -63,8 +69,7 @@ class DetailsPane extends React.Component {
                 console.log('Food info not found!')
                 return (<div className='menu_list_container'>
                 <div className="menu-list">
-                    <h2> {this.state.name} </h2>
-                    <h2> {this.state.address} </h2>
+                    <h2> {this.state.name} at {this.state.address} </h2>
                     <h2> Not enough reviews! </h2>
                 </div> 
             </div>)

@@ -75,9 +75,6 @@ getSearchData = (searchTerm) => {
                     searched={this.state.searched}
                     itemSelect={this.setSelectedItem}
                 />
-            {/* <Route exact path="/" render = {() => (
-                  
-              )}/> */}
           </div>
         </Router>
       </div>
