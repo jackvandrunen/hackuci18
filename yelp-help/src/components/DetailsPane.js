@@ -25,6 +25,7 @@ const DetailsPane = (props) => {
     }
 
     if (food_info.length > 0) {
+        console.log('Food info good!')
         // return (
         //     <div className='details-pane-container'>
         //          <div className="details-pane">
@@ -42,6 +43,7 @@ const DetailsPane = (props) => {
                 </div> 
             </div>)
     } else {
+        console.log("i hate food info!")
         return (
             <div className ="details-pane-container">
                 <h2>Loading for {props.match.params.place}</h2>
