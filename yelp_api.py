@@ -23,7 +23,7 @@ def format_search_url() -> str:
     '''
     Formats and returns the formatted URL to retrieve businesses in a search.
     '''
-    return API_HOST + "/v3/businesses/search?categories=restaurants"
+    return API_HOST + "/v3/businesses/search"
 
 
 def format_reviews_url(business_id: str) -> str:
@@ -60,7 +60,8 @@ def get_search_json_data(terms: str, location: str) -> dict:
         search_terms = {
             'term': terms.replace(' ', '+'),
             'location': location.replace(' ', '+'),
-            'limit': SEARCH_LIMIT
+            'limit': SEARCH_LIMIT,
+            'categories': "restaurant"
         }
         response = requests.request('GET', format_search_url(), headers=HEADERS, params=search_terms)
         return response.json()
