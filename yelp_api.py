@@ -94,7 +94,11 @@ def get_all_reviews_json_data(business_id: str) -> dict:    # USES BEAUTIFULSOUP
         raise yelp_api_exception.YelpAPIException()
 
 
+<<<<<<< HEAD
 # # TESTING PURPOSES ONLY
+=======
+# TESTING PURPOSES ONLY
+>>>>>>> abf25dc8930e156204e01aef7dbaaf938b36a4c1
 # if __name__ == "__main__":
 #     print(get_business_json_data('pizza-hut-irvine-3'))
 #     print(get_reviews_json_data('pizza-hut-irvine-3'))
