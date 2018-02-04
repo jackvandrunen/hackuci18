@@ -44,18 +44,28 @@ class DetailsPane extends React.Component {
                         <h2>Loading {this.state.my_id}...</h2>
                 </div>)
         } else if (this.state.requested) {
-            console.log('Food info good!')
-            return (<div className='menu_list_container'>
-                    <div className="menu-list">
+            if (this.state.food_info.length > 0) {
+                console.log("food found")
+                return (<div className='menu_list_container'>
+                <div className="menu-list">
+                <h2> {this.state.name} </h2>
+                    {this.state.food_info.map((item, index) => {
+                        console.log(item)
+                        return (
+                            <MenuItem info={item} />
+                        )
+                    })}
+                </div> 
+            </div>)
+            } else {
+                console.log('Food info not found!')
+                return (<div className='menu_list_container'>
+                <div className="menu-list">
                     <h2> {this.state.name} </h2>
-                        {this.state.food_info.map((item, index) => {
-                            console.log(item)
-                            return (
-                                <MenuItem info={item} />
-                            )
-                        })}
-                    </div> 
-                </div>)
+                    <h2> Not enough reviews! </h2>
+                </div> 
+            </div>)
+            }
         }
     }
 }
