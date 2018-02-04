@@ -21,10 +21,7 @@ class SearchBar extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        if (this.state.searched) {
-            this.props.resetSearch
-        }
-        this.setState({searched: true})
+        this.setState({searched: this.state.search !== "" ? true : false})
         this.props.updateSearchTerm(this.state.search)
     }
 
@@ -53,8 +50,7 @@ class SearchBar extends React.Component {
 }
 
 SearchBar.PropTypes = {
-    updateSearchTerm: PropTypes.func.isRequired,
-    resetSearch: PropTypes.func.isRequired
+    updateSearchTerm: PropTypes.func.isRequired
 }
 
 export default SearchBar

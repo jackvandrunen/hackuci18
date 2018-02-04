@@ -6,6 +6,7 @@ import './App.css';
 import Banner from './components/Banner'
 import ResultsList from './components/ResultsList'
 import DetailsPane from './components/DetailsPane'
+import {Redirect} from 'react-router'
 
 class App extends Component {
   constructor() {
@@ -16,19 +17,16 @@ class App extends Component {
         results: [],
         loading: false
       }
-  }
-
-    resetSearch = () => {
-      this.setState({
-          results: [],
-          loading: false,
-          searched: false
-      })
-  }
-
+    }
   updateSearchTerm = (searchTerm) => {
     if (searchTerm.length === 0) {
-        return null
+      console.log("zero!")
+      this.setState({
+        results: [],
+        loading: false,
+        searched: false
+      })
+      return <Redirect to="/"/>
     } else {
         this.getSearchData(searchTerm)
     }
@@ -67,7 +65,7 @@ getSearchData = (searchTerm) => {
           <div>
             <Search 
               updateSearchTerm={this.updateSearchTerm}
-              resetSearch={this.resetSearch} />
+              />
             <Route exact path="/" render = {() => (
                   <ResultsList 
                       loading={this.state.loading}

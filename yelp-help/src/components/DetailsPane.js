@@ -2,6 +2,8 @@ import React from 'react'
 import './DetailsPane.css'
 import PropTypes from 'prop-types'
 
+
+
 const DetailsPane = (props) => {
     if (props.loading) {
         return (
@@ -14,7 +16,7 @@ const DetailsPane = (props) => {
         return (
             <div className='details-pane-container'>
                  <div className="details-pane">
-                    {/* Parse out ML response from endpoint */}
+                    
                     <h2>Please help me</h2>
                 </div> 
             </div>
