@@ -22,4 +22,4 @@ def search_results():
     print json.dumps(response)
     return json.dumps(response)
 
-bottle.run(host='localhost', port=8181)    # TURN DEBUG TO FALSE FOR LIVE VERSION
+bottle.run(host='localhost', port=8181, debug=True)    # TURN DEBUG TO FALSE FOR LIVE VERSION
