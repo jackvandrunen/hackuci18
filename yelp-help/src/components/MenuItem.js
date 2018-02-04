@@ -8,8 +8,8 @@ class MenuItem extends React.Component {
 
     render () {
         console.log("please")
-        const item = this.props.info.item
-        const rating = this.props.info.rating
+        const item = this.props.info[0]
+        const rating = this.props.info[1]
         console.log(item)
         const containerClasses = 'menu-list-item-container'
         return (

@@ -51,8 +51,9 @@ class DetailsPane extends React.Component {
             return (<div className='menu_list_container'>
                     <div className="menu-list">
                         {this.state.food_info.map((item, index) => {
+                            console.log(item)
                             return (
-                                <MenuItem key = {index} info={item}/>
+                                <MenuItem info={item} />
                             )
                         })}
                     </div> 
