@@ -17,7 +17,7 @@ class DetailsPane extends React.Component {
 
     //var my_id = props.match.params.place
     render() {
-        if (this.state.my_id !== '') {
+        if (this.state.my_id !== '' && !this.state.requested) {
             console.log(this.state.my_id)
             var my_app = this
             try {
@@ -46,15 +46,8 @@ class DetailsPane extends React.Component {
                 })};
             </div> 
         </div>)
-        } else if (this.state.food_info.length > 0) {
+        } else if (this.state.requested) {
             console.log('Food info good!')
-            // return (
-            //     <div className='details-pane-container'>
-            //          <div className="details-pane">
-                    
-            //         </div> 
-            //     </div>
-            // )
             return (<div className='menu_list_container'>
                     <div className="menu-list">
                         {this.state.food_info.forEach(element => {
