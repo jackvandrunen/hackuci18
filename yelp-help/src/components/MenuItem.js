@@ -15,9 +15,11 @@ class MenuItem extends React.Component {
         return (
             <div className={containerClasses}>
                 <div className="menu-list-item">
-                    <div className="menu-list-item-description">
+                    <div className="menu-list-item-name">
                         <h2>{item}</h2>
-                        <p>{rating}</p>
+                    </div>
+                    <div className="menu-list-item-rating">
+                        <h2>{rating}</h2>
                     </div>
                 </div>
             </div>
