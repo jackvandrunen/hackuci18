@@ -52,7 +52,7 @@ class DetailsPane extends React.Component {
                     <div className="menu-list">
                         {this.state.food_info.map((item, index) => {
                             return (
-                                <ListItem key = {index} info={item}/>
+                                <MenuItem key = {index} info={item}/>
                             )
                         })}
                     </div> 
