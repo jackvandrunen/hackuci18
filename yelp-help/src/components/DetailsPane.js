@@ -19,35 +19,35 @@ const DetailsPane = (props) => {
     // } catch (e) {
     //     console.log(e)
     // }
-    // try {
-    //     var options = { method: 'GET',
-    //       url: 'http://localhost:8080/lookup/',
-    //       qs: {id : my_id}
-    //     };
+    try {
+        var options = { method: 'GET',
+          url: 'http://localhost:8080/lookup/',
+          qs: {id : my_id}
+        };
   
-    //   request(options, function (error, response, body) {
-    //     if (error) throw new Error(error);
-    //     //Begin request to Jack using raw body
-    //     try {
-    //         var options = { method: 'GET',
-    //           url: 'http://localhost:8181//',
-    //           qs: {reviews : body}
-    //         };
+      request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+        //Begin request to Jack using raw body
+        try {
+            var options = { method: 'GET',
+              url: 'http://localhost:8181//',
+              qs: {reviews : body}
+            };
       
-    //       request(options, function (error, response, body) {
-    //         if (error) throw new Error(error);
-    //         var jack_json = JSON.parse(body)
-    //         console.log(jack_json)
-    //         //end request to jack
+          request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+            var jack_json = JSON.parse(body)
+            console.log(jack_json)
+            //end request to jack
             
-    //       });
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    //   });
-    // } catch (e) {
-    //     console.log(e)
-    // }
+          });
+        } catch (e) {
+            console.log(e)
+        }
+      });
+    } catch (e) {
+        console.log(e)
+    }
 
     if (props.match.params.place !== '') {
         return (
