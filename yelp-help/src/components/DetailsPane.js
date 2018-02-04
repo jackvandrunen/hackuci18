@@ -17,6 +17,7 @@ const DetailsPane = (props) => {
         if (error) throw new Error(error);
         var json = JSON.parse(body)
         food_info = json[1]
+        console.log(food_info)
       });
     } catch (e) {
         console.log(e)
