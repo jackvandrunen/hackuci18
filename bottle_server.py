@@ -42,4 +42,5 @@ def get_json_to_send_to_ml():
     return reviews.generate_review_text_json(yelp_api.get_all_reviews_json_data(bottle.request.query.id))
 
 
-bottle.run(host='localhost', port=8080, debug=True)    # TURN DEBUG TO FALSE FOR LIVE VERSION
+if __name__ == '__main__':
+    bottle.run(host='localhost', port=8080, debug=True)    # TURN DEBUG TO FALSE FOR LIVE VERSION
