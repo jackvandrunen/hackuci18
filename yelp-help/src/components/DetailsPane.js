@@ -69,6 +69,7 @@ class DetailsPane extends React.Component {
                 console.log('Food info not found!')
                 return (<div className='menu_list_container'>
                 <div className="menu-list">
+                    <button onClick={this.clickHandler} Reset Search />
                     <h2> {this.state.name} at {this.state.address} </h2>
                     <h2> Not enough reviews! </h2>
                 </div> 
