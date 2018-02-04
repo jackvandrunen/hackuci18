@@ -2,10 +2,11 @@ import React from 'react'
 import './DetailsPane.css'
 import PropTypes from 'prop-types'
 import request from 'request'
+import MenuItem from './MenuItem'
 
 const DetailsPane = (props) => {
     const my_id = props.match.params.place
-    var food_info = ''
+    var food_info = {}
     
     try {
         var options = { method: 'GET',
@@ -23,15 +24,23 @@ const DetailsPane = (props) => {
         console.log(e)
     }
 
-    if (food_info !== '') {
-        return (
-            <div className='details-pane-container'>
-                 <div className="details-pane">
-                    <h2>{food_info[0][0]}</h2>
-                    <h2>{food_info[0][1]}</h2>
+    if (food_info.length > 0) {
+        // return (
+        //     <div className='details-pane-container'>
+        //          <div className="details-pane">
+                 
+        //         </div> 
+        //     </div>
+        // )
+        return (<div className='menu_list_container'>
+                 <div className="menu-list">
+                    {food_info.forEach(element => {
+                       return (
+                        <MenuItem info={element}/>
+                        ) 
+                    })};
                 </div> 
-            </div>
-        )
+            </div>)
     } else {
         return (
             <div className ="details-pane-container">

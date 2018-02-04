@@ -1,10 +1,16 @@
-.details-pane-container {
-    width: 500px;
-    height: 200px;
-    padding-top: 10px;
-    padding-right: 10px;
+.menu-list-container {
+    width: 100%;
     display: flex;
-    justify-content: right;
-    align-items: right;
-    justify-self: right;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
 }
