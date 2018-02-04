@@ -5,6 +5,7 @@ import ListItem from './ListItem'
 
 const ResultsList = (props) => {
     if (props.loading) {
+        console.log("option1")
         return (
             <div className = "results-list-container">
             {/*Loading gif*/}
@@ -12,6 +13,7 @@ const ResultsList = (props) => {
             </div>
         )
     } else if (props.results.length > 0) {
+        console.log("option2")
         return (
             <div className='results_list_container'>
                  <div className="results-list">
@@ -24,6 +26,7 @@ const ResultsList = (props) => {
             </div>
         )
     } else if (props.searched) {
+        console.log("option3")
         return (
             <div className ="results-list-container">
                 <div className="no-results-found">
@@ -33,6 +36,7 @@ const ResultsList = (props) => {
             </div> 
         )
     } else {
+        console.log("option4")
         return (
             <div className ="results-list-container">
                 <h2>Bottom Text</h2>

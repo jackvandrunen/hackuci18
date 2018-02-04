@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Search from  './components/Search'
 import request from 'request'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Link, BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css';
 import Banner from './components/Banner'
 import ResultsList from './components/ResultsList'
@@ -27,8 +27,9 @@ class App extends Component {
         loading: false,
         searched: false
       })
-      return <Redirect to="/"/>
+      return <Redirect from='/' to='/public'/>
     } else {
+        console.log(searchTerm)
         this.getSearchData(searchTerm)
     }
   }
@@ -63,14 +64,11 @@ getSearchData = (searchTerm) => {
   render() {
     return (
       <div>
-        <div>
-          <Banner/>
-        </div>
+        <Banner/>
         <Router>
           <div>
             <Search 
-              updateSearchTerm={this.updateSearchTerm}
-              />
+              updateSearchTerm={this.updateSearchTerm}/>
             <Route exact path="/" render = {() => (
                   <ResultsList 
                       loading={this.state.loading}
