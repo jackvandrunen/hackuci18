@@ -15,4 +15,4 @@ class Reviews:
         for i in range(len(decoded_json["review"])):
             result["reviews"].append(decoded_json["review"][i]["description"])
 
-        return result
+        return json.dump(result, "reviews.json")
