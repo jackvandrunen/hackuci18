@@ -29,12 +29,12 @@ class DetailsPane extends React.Component {
               request(options, function (error, response, body) {
                 if (error) throw new Error(error);
                 var json = JSON.parse(body)
+                console.log(json)
                 my_app.setState({
                     name: json[0].restaurant.name,
                     food_info: json[1]
                 })
                 my_app.state.requested = true
-                console.log(json)
               });
             } catch (e) {
                 console.log(e)
