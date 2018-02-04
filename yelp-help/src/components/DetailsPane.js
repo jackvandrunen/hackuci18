@@ -30,8 +30,9 @@ const DetailsPane = (props) => {
         //Begin request to Jack using raw body
         try {
             var options = { method: 'GET',
-              url: 'http://localhost:8181//',
-              qs: {reviews : body}
+              url: 'http://localhost:8181/menu/',
+              qs: {reviews : body},
+              mode: 'no-cors'
             };
       
           request(options, function (error, response, body) {

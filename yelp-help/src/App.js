@@ -27,7 +27,6 @@ class App extends Component {
         loading: false,
         searched: false
       })
-      return <Redirect from='/' to='/public'/>
     } else {
         console.log(searchTerm)
         this.getSearchData(searchTerm)
@@ -69,16 +68,16 @@ getSearchData = (searchTerm) => {
           <div>
             <Search 
               updateSearchTerm={this.updateSearchTerm}/>
-            <Route exact path="/" render = {() => (
-                  <ResultsList 
-                      loading={this.state.loading}
-                      results={this.state.results}
-                      searched={this.state.searched}
-                      itemSelect={this.setSelectedItem}
-                  />
-              )}/>
             <Route path="/details/:place" component={DetailsPane}/>
-              )}/>
+            <ResultsList 
+                    loading={this.state.loading}
+                    results={this.state.results}
+                    searched={this.state.searched}
+                    itemSelect={this.setSelectedItem}
+                />
+            {/* <Route exact path="/" render = {() => (
+                  
+              )}/> */}
           </div>
         </Router>
       </div>

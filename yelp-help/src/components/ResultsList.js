@@ -39,7 +39,6 @@ const ResultsList = (props) => {
         console.log("option4")
         return (
             <div className ="results-list-container">
-                <h2>Bottom Text</h2>
             </div>
         )       
     }
