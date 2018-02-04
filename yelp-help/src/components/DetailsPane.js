@@ -33,7 +33,7 @@ class DetailsPane extends React.Component {
                 console.log(json)
                 my_app.setState({
                     name: json[0].name,
-                    address: json[0].address,
+                    address: json[0].location.address1,
                     food_info: json[1]
                 })
                 my_app.state.requested = true
@@ -50,12 +50,11 @@ class DetailsPane extends React.Component {
                 console.log("food found")
                 return (<div className='menu_list_container'>
                 <div className="menu-list">
-                <h2> {this.state.name} </h2>
-                <h2> {this.state.address} </h2>
+                <h2> {this.state.name} at {this.state.address}</h2>
                     {this.state.food_info.map((item, index) => {
                         console.log(item)
                         return (
-                            <MenuItem info={item} />
+                            <MenuItem key={index} info={item} />
                         )
                     })}
                 </div> 
