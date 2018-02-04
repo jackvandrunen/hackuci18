@@ -1,9 +1,12 @@
 from gensim.models.doc2vec import Doc2Vec
 import torch
+from torch.autograd import Variable
 import json
 from rake_nltk import Rake
 import ml
 import gensim.utils as utils
+import itertools
+import numpy as np
 
 import valence_model, arousal_model
 
@@ -25,6 +28,28 @@ def similarity_to_food(model, phrase):
         return model.wv.n_similarity(phrase, ['food'])
     except KeyError:
         return -1.0
+
+def infer_emotion(vector):
+    x = Variable(torch.FloatTensor(np.array([vector])), requires_grad=False)
+    valence = float(valence_model(x))
+    arousal = float(arousal_model(x))
+    return valence * arousal
+
+
+def score_phrases(phrases, reviews):
+    for phrase in phrases:
+        sentences = []
+        for review in reviews:
+            for sentence in review:
+                sentence = ' '.join(sentence)
+                if phrase in sentence:
+                    sentences.append(sentence)
+        score = 0.0
+        for sentence in sentences:
+            vector = sentence_model.infer_vector(sentence.split())
+            score += infer_emotion(vector)
+        score /= len(sentences)
+        yield phrase, int(score * 100)
 
 def menu_response(reviews):
     if not reviews:
@@ -60,4 +85,4 @@ def menu_response(reviews):
                 pass
         similar_phrases.pop(0)
     
-    return sorted([(item, 50) for item in food_phrases], key=lambda t: t[1]), 200
+    return sorted(score_phrases(food_phrases, reviews), key=lambda t: t[1]), 200
