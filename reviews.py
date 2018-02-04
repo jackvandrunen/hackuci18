@@ -4,8 +4,8 @@ class Reviews:
     def __init__(self, decoded_json: dict):
         self._review_text_json = self._generate_review_text_json(decoded_json)
     
-    def get_review_text_json(self) -> [str]:
-        '''Gets the text of the reviews'''
+    def get_review_text_json(self) -> json:
+        '''Gets the json of the reviews'''
         return self._review_text_json
 
     def _generate_review_text_json(self, decoded_json: dict):
