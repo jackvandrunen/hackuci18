@@ -15,7 +15,8 @@ class App extends Component {
       this.state = {
         searched: false,
         results: [],
-        loading: false
+        loading: false,
+        searchedItem: ''
       }
     }
   updateSearchTerm = (searchTerm) => {
@@ -30,6 +31,10 @@ class App extends Component {
     } else {
         this.getSearchData(searchTerm)
     }
+  }
+
+  setSelectedItem = (item) => {
+      this.setState(({searchedItem:item}))
   }
 
 getSearchData = (searchTerm) => {
@@ -71,13 +76,10 @@ getSearchData = (searchTerm) => {
                       loading={this.state.loading}
                       results={this.state.results}
                       searched={this.state.searched}
+                      itemSelect={this.setSelectedItem}
                   />
               )}/>
-            <Route path="/details/" render={() => (
-                  <DetailsPane
-                      loading={this.state.loading}
-                      results={this.state.results}
-                  />
+            <Route path="/details/:place" component={DetailsPane}/>
               )}/>
           </div>
         </Router>

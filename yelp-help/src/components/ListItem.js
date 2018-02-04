@@ -18,9 +18,12 @@ class ListItem extends React.Component {
 
     render () {
         const name = this.props.restaurant.name 
+        const id = this.props.restaurant.id
         const containerClasses = 'result-list-item-container'
         if (this.state.redirect) {
-            return <Redirect to="details/"/>
+            return <Redirect to={{
+                pathname: '/details/' + id,
+              }}/>
         }
         return (
             <div className={containerClasses}>
@@ -36,7 +39,6 @@ class ListItem extends React.Component {
 }
 
 ListItem.PropTypes = {
-    router: PropTypes.func.isRequired
 }
 
 export default ListItem

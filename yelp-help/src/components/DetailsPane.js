@@ -1,34 +1,32 @@
 import React from 'react'
 import './DetailsPane.css'
 import PropTypes from 'prop-types'
-
-
+import request from 'request'
 
 const DetailsPane = (props) => {
-    if (props.loading) {
-        return (
-            <div className = "details-pane-container">
-            {/*Loading gif*/}
-            <h2>LoadingText</h2>
-            </div>
-        )
-    } else if (props.results.length > 0) {
+    const my_id = props.match.params.place
+    try {
+        var options = { method: 'GET',
+          url: 'http://localhost:8080/lookup/',
+          qs: {id : my_id}
+        };
+  
+      request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+        var json = JSON.parse(body)
+        console.log(json)
+      });
+    } catch (e) {
+        console.log(e)
+    }
+
+    if (props.match.params.place !== '') {
         return (
             <div className='details-pane-container'>
                  <div className="details-pane">
-                    
-                    <h2>Please help me</h2>
+                    <h2>{props.match.params.place}</h2>
                 </div> 
             </div>
-        )
-    } else if (props.searched) {
-        return (
-            <div className ="details-pane-container">
-                <div className="no-results-found">
-                {/*Fail header text*/}
-                <h2>No results found for query!</h2>
-                </div>
-            </div> 
         )
     } else {
         return (
