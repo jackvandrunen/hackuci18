@@ -47,7 +47,7 @@ class DetailsPane extends React.Component {
             console.log('Food info good!')
             return (<div className='menu_list_container'>
                     <div className="menu-list">
-                    <h2> 
+                    <h2> {this.state.name} </h2>
                         {this.state.food_info.map((item, index) => {
                             console.log(item)
                             return (
