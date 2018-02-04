@@ -4,7 +4,7 @@
 
 Main Menu uses 4 distinct models to understand the emotional content of Yelp reviews and extract key food items that are served at restaurants. Using these models it generates an informative and intuitive menu that allows you to quickly see what people think about the restaurant.
 
-No more stress when eating out! Spend more time enjoying your meal with friends by understanding a restaurant before you walk in the door.
+No more stress when eating out! Spend more time enjoying your meal with friends by understanding a restaurant before you walk in the door. You'll never be able to eat at a restaurant without this app again!
 
 ## How to Use
 1. Search for a restaurant using the search bar and location input utilizing Yelp's API search.
