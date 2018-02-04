@@ -1,6 +1,6 @@
 # Main Menu
 
-> Semantic anlysis of Yelp reviews to generate informative restaurant menus.
+> Semantic analysis of Yelp reviews to generate informative restaurant menus.
 
 Main Menu uses 4 distinct models to understand the emotional content of Yelp reviews and extract key food items that are served at restaurants. Using these models it generates an informative and intuitive menu that allows you to quickly see what people think about the restaurant.
 
