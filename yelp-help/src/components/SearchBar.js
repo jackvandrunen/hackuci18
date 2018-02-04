@@ -1,6 +1,7 @@
 import React from 'react'
 import './SearchBar.css'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 class SearchBar extends React.Component {
     constructor(props) {
@@ -21,6 +22,9 @@ class SearchBar extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault()
         this.setState({searched: this.state.search !== "" ? true : false})
+        if (!this.state.searched) {
+            <Link to='/'/>
+        }
         this.props.updateSearchTerm(this.state.search)
     }
 
