@@ -25,10 +25,9 @@ def search_results():
 
 
 def _retrieve_ml_json_data(business_id: str) -> json:   # Talks to ML server and retrieves JSON data
-    params   = {'reviews': reviews.Reviews(yelp_api.get_all_reviews_json_data(business_id)).get_review_text_json()}
+    params   = {'reviews': reviews.generate_review_text_json(yelp_api.get_all_reviews_json_data(business_id))}
     response = requests.get("{}:{}/menu/".format(API_HOST, ML_LOCAL_PORT), params=params)
     return response.json()
-
 
 
 @bottle.route('/lookup/', method = 'GET')

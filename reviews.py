@@ -1,5 +1,18 @@
 import json
 
+def generate_review_text_json(decoded_json):
+    result = []
+
+    for i in range(len(decoded_json["review"])):
+        result.append(decoded_json["review"][i]["description"])
+
+    return json.dumps(result)
+
+
+
+
+
+"""
 class Reviews:
     def __init__(self, decoded_json: dict):
         self._review_text_json = self._generate_review_text_json(decoded_json)
@@ -16,3 +29,4 @@ class Reviews:
             result["reviews"].append(decoded_json["review"][i]["description"])
 
         return json.dump(result, "reviews.json")
+"""
