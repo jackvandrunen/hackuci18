@@ -20,7 +20,7 @@ class DetailsPane extends React.Component {
     }
 
     clickHandler = (event) => {
-        <Link to={`/`} />
+        window.location.reload();
     }
 
     render() {
