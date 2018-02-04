@@ -20,7 +20,7 @@ class DetailsPane extends React.Component {
     }
 
     clickHandler = (event) => {
-        window.location.reload();
+        window.location.href = 'http://localhost:3000'
     }
 
     render() {
