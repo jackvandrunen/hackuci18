@@ -14,6 +14,7 @@ class DetailsPane extends React.Component {
             food_info: [],
             name: ''
         }
+        this.state.requested = false
     }
 
     //var my_id = props.match.params.place
