@@ -11,7 +11,8 @@ class DetailsPane extends React.Component {
         this.state = {
             requested: false,
             my_id: props.match.params.place,
-            food_info: []
+            food_info: [],
+            name: ''
         }
     }
 
@@ -29,27 +30,24 @@ class DetailsPane extends React.Component {
                 if (error) throw new Error(error);
                 var json = JSON.parse(body)
                 my_app.setState({
+                    name: json[0].restaurant.name,
                     food_info: json[1]
                 })
                 my_app.state.requested = true
-                console.log(my_app.state.food_info)
+                console.log(json)
               });
             } catch (e) {
                 console.log(e)
             }
-            return (<div className='menu_list_container'>
-            <div className="menu-list">
-                {this.state.food_info.forEach(element => {
-                return (
-                    <MenuItem info={element}/>
-                    ) 
-                })};
-            </div> 
-        </div>)
+            return (
+                <div className ="menu-list-container">
+                        <h2>Loading for {this.state.my_id}</h2>
+                </div>)
         } else if (this.state.requested) {
             console.log('Food info good!')
             return (<div className='menu_list_container'>
                     <div className="menu-list">
+                    <h2> 
                         {this.state.food_info.map((item, index) => {
                             console.log(item)
                             return (
@@ -58,13 +56,6 @@ class DetailsPane extends React.Component {
                         })}
                     </div> 
                 </div>)
-        } else {
-            console.log("i hate food info!")
-            return (
-                <div className ="details-pane-container">
-                    <h2>Loading for {this.state.my_id}</h2>
-                </div>
-            )       
         }
     }
 }

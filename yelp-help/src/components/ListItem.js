@@ -13,6 +13,7 @@ class ListItem extends React.Component {
     }
 
     handleSelect = (event) => {
+        event.preventDefault()
        this.setState({redirect: true})
     }
 
