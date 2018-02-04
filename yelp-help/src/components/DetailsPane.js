@@ -12,12 +12,12 @@ class DetailsPane extends React.Component {
             requested: false,
             my_id: props.match.params.place,
             food_info: [],
-            name: ''
+            name: '',
+            address:''
         }
         this.state.requested = false
     }
 
-    //var my_id = props.match.params.place
     render() {
         if (this.state.my_id !== '' && !this.state.requested) {
             console.log(this.state.my_id)
@@ -33,6 +33,7 @@ class DetailsPane extends React.Component {
                 console.log(json)
                 my_app.setState({
                     name: json[0].name,
+                    address: json[0].address,
                     food_info: json[1]
                 })
                 my_app.state.requested = true
@@ -42,7 +43,7 @@ class DetailsPane extends React.Component {
             }
             return (
                 <div className ="menu-list-container">
-                        <h2>Loading {this.state.my_id}...</h2>
+                        <h2>Loading favorites for {this.state.my_id}...</h2>
                 </div>)
         } else if (this.state.requested) {
             if (this.state.food_info.length > 0) {
@@ -50,6 +51,7 @@ class DetailsPane extends React.Component {
                 return (<div className='menu_list_container'>
                 <div className="menu-list">
                 <h2> {this.state.name} </h2>
+                <h2> {this.state.address} </h2>
                     {this.state.food_info.map((item, index) => {
                         console.log(item)
                         return (
@@ -63,6 +65,7 @@ class DetailsPane extends React.Component {
                 return (<div className='menu_list_container'>
                 <div className="menu-list">
                     <h2> {this.state.name} </h2>
+                    <h2> {this.state.address} </h2>
                     <h2> Not enough reviews! </h2>
                 </div> 
             </div>)
