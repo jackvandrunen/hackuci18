@@ -33,7 +33,7 @@ def infer_emotion(vector):
     x = Variable(torch.FloatTensor(np.array([vector])), requires_grad=False)
     valence = float(valence_model(x))
     arousal = float(arousal_model(x))
-    return valence * arousal
+    return arousal
 
 
 def score_phrases(phrases, reviews):
@@ -57,11 +57,11 @@ def menu_response(reviews):
 
     reviews = filter(len, [filter(len, map(utils.simple_preprocess, i.split('.'))) for i in reviews])
     r = Rake()
-    key_phrases = set()
+    key_phrases = []
     for review in reviews:
         r.extract_keywords_from_sentences(sentences(review))
         for i in sorted(r.get_ranked_phrases(), key=lambda s: similarity_to_food(ml.sentence_model, s), reverse=True)[:5]:
-            key_phrases.add(i)
+            key_phrases.append(i)
 
     similar_phrases = []
     for p1, p2 in map(lambda t: (t[0].split(), t[1].split()), itertools.combinations(key_phrases, 2)):
@@ -71,7 +71,7 @@ def menu_response(reviews):
             pass
     similar_phrases = sorted(similar_phrases, key=lambda t: t[2], reverse=True)
 
-    food_phrases = set()
+    '''food_phrases = set()
     while similar_phrases and similar_phrases[0][2] > 0.9:
         shrt, lng = sorted([' '.join(similar_phrases[0][0]), ' '.join(similar_phrases[0][1])], key=len)
         if shrt not in food_phrases and lng not in food_phrases:
@@ -83,6 +83,26 @@ def menu_response(reviews):
                 key_phrases.remove(lng)
             except KeyError:
                 pass
-        similar_phrases.pop(0)
+        similar_phrases.pop(0)'''
+
+    food_phrases, rejected, queue = set(), set(), set()
+    for p1, p2, similarity in similar_phrases:
+        if similarity < 0.75:
+            break
+        p1 = ' '.join(p1)
+        p2 = ' '.join(p2)
+        if p1 in food_phrases | rejected or p2 in food_phrases | rejected:
+            continue
+        if p1 in queue or p2 in queue:
+            if len(p1) < len(p2):
+                food_phrases.add(p1)
+                rejected.add(p2)
+            else:
+                food_phrases.add(p2)
+                rejected.add(p1)
+        else:
+            queue.add(p1)
+            queue.add(p2)
+
     
     return sorted(score_phrases(food_phrases, reviews), key=lambda t: t[1], reverse=True), 200

@@ -13,7 +13,7 @@ class Vec2ArousalNet(torch.nn.Module):
 
     def forward(self, x):
         h = self.layer_1(x).clamp(min=0)
-        y = self.layer_2(h)
+        y = self.layer_2(h).clamp(min=0, max=1)
         return y
 
 
@@ -47,8 +47,8 @@ if __name__ == '__main__':
     x = Variable(torch.zeros(N, D_in), requires_grad=False)
     y = Variable(torch.zeros(N, D_out), requires_grad=False)
 
-#   model = Vec2ArousalNet(D_in, H, D_out)
-    model = torch.load('arousal_model1.dat')
+    model = Vec2ArousalNet(D_in, H, D_out)
+    model.load_state_dict(torch.load('arousal_model1.dat'))
 
     error = torch.nn.MSELoss(size_average=False)
     optim = torch.optim.Adam(model.parameters(), lr=1e-03)
