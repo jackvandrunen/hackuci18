@@ -1,35 +1,41 @@
-# # Bottle server for searches and lookups on Yelp API
-
-# import bottle
-# import yelp_api
-
-# @bottle.route('/search/')
-# def search_results():
-#     search_terms = bottle.request.query.terms       # Reads query "terms" and "location"
-#     location     = bottle.request.query.location
-#     return yelp_api.get_search_json_data(search_terms, location)
-
-
-# bottle.run(host='localhost', port=8080, debug=True)    # TURN DEBUG TO FALSE FOR LIVE VERSION
+# Bottle server for searches and lookups on Yelp API
 
 import bottle
 import yelp_api
+import reviews
+import requests
+import json
+
+API_HOST = "http://localhost"
+ML_LOCAL_PORT = 8181
+
 
 @bottle.hook('after_request')
 def enableCORSAfterRequestHook():
     print ('After request hook.')
     bottle.response.headers['Access-Control-Allow-Origin'] = '*'
 
+
 @bottle.route('/search/', method='GET')
 def search_results():
     search_terms = bottle.request.query.terms       # Reads query "terms" and "location"
     location     = bottle.request.query.location
-    response = yelp_api.get_search_json_data(search_terms, location)
+    response     = yelp_api.get_search_json_data(search_terms, location)
     return response
+
+
+def _retrieve_ml_json_data(business_id: str) -> json:   # Talks to ML server and retrieves JSON data
+    params = reviews.Review(yelp_api.get_all_reviews_json_data(business_id)).get_review_text_json()
+    response = requests.get("{}:{}".format(API_HOST, ML_LOCAL_PORT), params=params)
+    return response.json()
+
+
 
 @bottle.route('/lookup/', method = 'GET')
 def biz_lookup():
     business_id = bottle.request.query.id
-    return yelp_api.get_business_json_data(business_id)
+    ml_reviews  =_retrieve_ml_json_data(business_id)
+    return yelp_api.get_business_json_data(business_id), ml_reviews
+
 
 bottle.run(host='localhost', port=8080, debug=True)    # TURN DEBUG TO FALSE FOR LIVE VERSION

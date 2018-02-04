@@ -1,0 +1,4 @@
+gensim
+pytorch
+rake-nltk
+bottle

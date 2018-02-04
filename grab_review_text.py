@@ -13,10 +13,10 @@ if __name__ == '__main__':
     for i in restaurant_list:
         review_text_file.write("====================\n" + i + "\n====================\n")
 
-        review_text = reviews.Reviews(yelp_api.get_all_reviews_json_data(i)).get_review_text()
+        review_text_json = reviews.Reviews(yelp_api.get_all_reviews_json_data(i)).get_review_text_json()
 
         review_text_file.write("--------------------\n")
-        for i in review_text:
+        for i in review_text_json["reviews"]:
             review_text_file.write(i + "\n--------------------\n")
     
     review_text_file.close()
