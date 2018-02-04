@@ -31,7 +31,8 @@ const DetailsPane = (props) => {
         try {
             var options = { method: 'GET',
               url: 'http://localhost:8181/menu/',
-              qs: {reviews : body}
+              qs: {reviews : body},
+              mode: 'no-cors'
             };
       
           request(options, function (error, response, body) {
